@@ -304,17 +304,20 @@ btnCancelar.addEventListener("click", limparForm);
 filtroStatus.addEventListener("change", renderizar);
 
 btnNotificacao.addEventListener("click", async () => {
-  if (!("Notification" in window)) {
+
+  if (!("Notification" in window")) {
     return mostrarToast("Seu navegador não suporta notificações.");
   }
 
   const permission = await Notification.requestPermission();
 
-  mostrarToast(
-    permission === "granted"
-      ? "Notificações ativadas."
-      : "Notificações não foram permitidas."
-  );
+  if (permission === "granted") {
+    mostrarToast("Notificações ativadas.");
+    btnNotificacao.style.display = "none";
+  } else {
+    mostrarToast("Notificações não foram permitidas.");
+  }
+
 });
 
 carregarTarefas();
