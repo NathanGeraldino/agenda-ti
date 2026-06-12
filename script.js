@@ -188,8 +188,28 @@ function renderizar() {
     .sort((a, b) => criarDataLocal(a.data_hora) - criarDataLocal(b.data_hora))[0];
 
   document.getElementById("proximoLembrete").innerHTML = proxima
-    ? `<strong>Próximo:</strong><br>${proxima.titulo}<br><small>${formatarDataHora(proxima.data_hora)}</small>`
-    : "Nenhum lembrete pendente.";
+  ? `
+    <div style="font-size:12px;color:#6b7280;font-weight:bold;margin-bottom:8px;">
+      PRÓXIMO LEMBRETE
+    </div>
+
+    <div style="font-size:20px;font-weight:bold;color:#0d2ed3;">
+      ${proxima.titulo}
+    </div>
+
+    <div style="margin-top:8px;">
+      ${formatarDataHora(proxima.data_hora)}
+    </div>
+
+    <div style="margin-top:12px;color:#6b7280;">
+      Aviso ${proxima.minutos_antes} minutos antes
+    </div>
+  `
+  : `
+    <div style="font-size:18px;font-weight:bold;">
+      Nenhum lembrete pendente
+    </div>
+  `;
 
   let filtradas = [...tarefas];
 
