@@ -321,3 +321,21 @@ button {
     grid-template-columns: 1fr;
   }
 }
+
+.resumo-card {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.next-box {
+  min-height: 160px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: #f8fafc;
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--primary);
+  border-radius: 12px;
+  padding: 18px;
+}
