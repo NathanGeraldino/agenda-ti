@@ -60,7 +60,7 @@ body {
 
 .grid {
   display: grid;
-  grid-template-columns: 1.2fr .8fr;
+  grid-template-columns: 1.35fr .85fr;
   gap: 18px;
   margin-top: 18px;
   align-items: start;
@@ -181,7 +181,8 @@ button {
 }
 
 .list-card {
-  margin-top: -90px;
+  margin-top: 18px;
+  grid-column: 1 / -1;
 }
 
 .list-header {
@@ -324,9 +325,6 @@ button {
 }
 
 .resumo-card {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
   height: fit-content;
 }
 
