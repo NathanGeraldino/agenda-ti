@@ -1,15 +1,15 @@
 :root {
-  --bg: #f4f7fb;
+  --bg: #f3f6fb;
   --card: #ffffff;
-  --text: #1f2937;
-  --muted: #6b7280;
+  --text: #111827;
+  --muted: #5f6b7a;
   --primary: #0d2ed3;
   --primary-dark: #081f93;
-  --danger: #dc2626;
-  --success: #16a34a;
+  --danger: #ef4444;
+  --success: #22c55e;
   --warning: #f59e0b;
-  --border: #e5e7eb;
-  --shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+  --border: #dfe5ef;
+  --shadow: 0 12px 32px rgba(15, 23, 42, 0.08);
 }
 
 * {
@@ -32,7 +32,7 @@ body {
   background: var(--primary);
   color: white;
   border-radius: 14px;
-  padding: 24px 28px;
+  padding: 26px 28px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -47,10 +47,11 @@ body {
 
 .hero p {
   margin: 0;
-  opacity: 0.92;
+  opacity: 0.95;
 }
 
 .tag {
+  display: inline-block;
   background: rgba(255,255,255,.18);
   padding: 6px 12px;
   border-radius: 999px;
@@ -60,7 +61,7 @@ body {
 
 .grid {
   display: grid;
-  grid-template-columns: 1.35fr .85fr;
+  grid-template-columns: 1.25fr .8fr;
   gap: 18px;
   margin-top: 18px;
   align-items: start;
@@ -70,13 +71,13 @@ body {
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: 14px;
-  padding: 22px;
+  padding: 24px;
   box-shadow: var(--shadow);
 }
 
 h2 {
-  margin-top: 0;
-  font-size: 22px;
+  margin: 0 0 20px;
+  font-size: 24px;
 }
 
 label {
@@ -90,12 +91,16 @@ input,
 textarea,
 select {
   width: 100%;
-  border: 1px solid #d1d5db;
+  border: 1px solid #cfd7e3;
   border-radius: 10px;
-  padding: 11px 12px;
+  padding: 12px 13px;
   font-size: 15px;
   outline: none;
-  background: #fff;
+  background: white;
+}
+
+textarea {
+  resize: vertical;
 }
 
 input:focus,
@@ -120,9 +125,14 @@ button {
   transition: .2s;
 }
 
+button:hover {
+  filter: brightness(.97);
+}
+
 .primary {
   width: 100%;
   margin-top: 18px;
+  height: 44px;
   color: white;
   background: var(--primary);
 }
@@ -144,31 +154,62 @@ button {
   color: var(--primary);
 }
 
+/* RESUMO */
+
+.resumo-card {
+  min-height: 565px;
+}
+
+.next-box {
+  background: #f8fafc;
+  border: 1px solid var(--border);
+  border-left: 5px solid var(--primary);
+  border-radius: 12px;
+  padding: 22px;
+  min-height: 170px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: var(--muted);
+  margin-bottom: 18px;
+}
+
+.next-box strong {
+  color: var(--primary);
+}
+
 .stats {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
 }
 
 .stats div {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    padding: 18px;
-    min-height: 82px;
+  background: #f8fafc;
+  border: 1px solid var(--border);
+  border-left: 5px solid var(--primary);
+  border-radius: 12px;
+  padding: 18px 20px;
+  min-height: 82px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .stats strong {
   display: block;
-  font-size: 30px;
+  font-size: 32px;
   color: var(--primary);
+  line-height: 1;
 }
 
 .stats span {
   color: var(--muted);
-  font-size: 13px;
+  font-size: 14px;
   font-weight: bold;
 }
+
+/* LISTA */
 
 .list-card {
   margin-top: 18px;
@@ -180,7 +221,7 @@ button {
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  margin-bottom: 14px;
+  margin-bottom: 16px;
 }
 
 .list-header select {
@@ -200,7 +241,7 @@ button {
   border-left: 5px solid var(--primary);
   border-radius: 12px;
   padding: 16px;
-  background: #fff;
+  background: white;
 }
 
 .task h3 {
@@ -260,7 +301,9 @@ button {
 }
 
 .actions button {
-  padding: 9px 11px;
+  width: 38px;
+  height: 38px;
+  padding: 0;
   border-radius: 9px;
 }
 
@@ -312,44 +355,8 @@ button {
   .row {
     grid-template-columns: 1fr;
   }
-}
 
-.resumo-card {
-    min-height: 680px;
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
+  .resumo-card {
+    min-height: auto;
+  }
 }
-
-.next-box {
-    min-height: 190px;
-    padding: 24px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.stat-icon {
-    width: 52px;
-    height: 52px;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 22px;
-    font-weight: bold;
-}
-
-.icon-blue {
-    background: #0d2ed3;
-}
-
-.icon-green {
-    background: #22c55e;
-}
-
-.icon-red {
-    background: #ef4444;
-}
-
