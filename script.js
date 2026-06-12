@@ -184,16 +184,21 @@ function renderizar() {
   document.getElementById("totalAtrasadas").textContent = pendentes.filter(estaAtrasada).length;
 
   const proxima = pendentes
-    .filter(t => criarDataLocal(t.data_hora) >= new Date())
     .sort((a, b) => criarDataLocal(a.data_hora) - criarDataLocal(b.data_hora))[0];
 
-  document.getElementById("proximoLembrete").innerHTML = proxima
+  const atrasada = proxima && criarDataLocal(proxima.data_hora) < new Date();
+
+document.getElementById("proximoLembrete").innerHTML = proxima
   ? `
     <div style="font-size:12px;color:#6b7280;font-weight:bold;margin-bottom:8px;">
-      PRÓXIMO LEMBRETE
+      ${atrasada ? "TAREFA ATRASADA" : "PRÓXIMO LEMBRETE"}
     </div>
 
-    <div style="font-size:20px;font-weight:bold;color:#0d2ed3;">
+    <div style="
+      font-size:20px;
+      font-weight:bold;
+      color:${atrasada ? "#dc2626" : "#0d2ed3"};
+    ">
       ${proxima.titulo}
     </div>
 
