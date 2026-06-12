@@ -327,6 +327,7 @@ button {
   display: flex;
   flex-direction: column;
   gap: 18px;
+  height: fit-content;
 }
 
 .next-box {
@@ -340,3 +341,4 @@ button {
   border-radius: 12px;
   padding: 18px;
 }
+
