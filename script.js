@@ -111,7 +111,7 @@ function editarTarefa(id) {
   document.getElementById("tarefaId").value = t.id;
   document.getElementById("titulo").value = t.titulo;
   document.getElementById("descricao").value = t.descricao || "";
-  document.getElementById("data").value = data.toISOString().slice(0, 10);
+  document.getElementById("data").value = data.slice(0, 10);
   document.getElementById("hora").value = data.toTimeString().slice(0, 5);
   document.getElementById("prioridade").value = t.prioridade;
   document.getElementById("minutosAntes").value = t.minutos_antes;
@@ -206,7 +206,7 @@ form.addEventListener("submit", async (e) => {
   const tarefa = {
     titulo: document.getElementById("titulo").value.trim(),
     descricao: document.getElementById("descricao").value.trim(),
-    data_hora: dataHoraISO(document.getElementById("data").value, document.getElementById("hora").value),
+    data_hora: `${document.getElementById("data").value}T${document.getElementById("hora").value}:00`,
     prioridade: document.getElementById("prioridade").value,
     minutos_antes: Number(document.getElementById("minutosAntes").value),
     email: document.getElementById("email").value.trim(),
