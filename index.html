@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lembretes TI</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="app">
+    <section class="hero">
+      <div>
+        <span class="tag">Central TI</span>
+        <h1>Lembretes e Reuniões</h1>
+        <p>Cadastre tarefas simples para não esquecer reuniões, retornos e prazos importantes.</p>
+      </div>
+      <button id="btnNotificacao" class="secondary">Ativar notificação no navegador</button>
+    </section>
+
+    <section class="grid">
+      <form id="formTarefa" class="card form-card">
+        <h2>Nova tarefa/reunião</h2>
+
+        <input type="hidden" id="tarefaId" />
+
+        <label>Título</label>
+        <input id="titulo" type="text" placeholder="Ex: Reunião com diretoria" required />
+
+        <label>Descrição</label>
+        <textarea id="descricao" placeholder="Detalhes rápidos..." rows="3"></textarea>
+
+        <div class="row">
+          <div>
+            <label>Data</label>
+            <input id="data" type="date" required />
+          </div>
+          <div>
+            <label>Hora</label>
+            <input id="hora" type="time" required />
+          </div>
+        </div>
+
+        <div class="row">
+          <div>
+            <label>Prioridade</label>
+            <select id="prioridade">
+              <option value="baixa">Baixa</option>
+              <option value="media" selected>Média</option>
+              <option value="alta">Alta</option>
+            </select>
+          </div>
+          <div>
+            <label>Avisar antes</label>
+            <select id="minutosAntes">
+              <option value="10">10 minutos</option>
+              <option value="15" selected>15 minutos</option>
+              <option value="30">30 minutos</option>
+              <option value="60">1 hora</option>
+            </select>
+          </div>
+        </div>
+
+        <label>E-mail para notificar</label>
+        <input id="email" type="email" placeholder="ti@empresa.com.br" />
+
+        <button type="submit" class="primary">Salvar lembrete</button>
+        <button type="button" id="btnCancelar" class="ghost hidden">Cancelar edição</button>
+      </form>
+
+      <section class="card resumo-card">
+        <h2>Resumo</h2>
+        <div class="stats">
+          <div><strong id="totalPendentes">0</strong><span>Pendentes</span></div>
+          <div><strong id="totalHoje">0</strong><span>Hoje</span></div>
+          <div><strong id="totalAtrasadas">0</strong><span>Atrasadas</span></div>
+        </div>
+        <div id="proximoLembrete" class="next-box">Nenhum lembrete pendente.</div>
+      </section>
+    </section>
+
+    <section class="card list-card">
+      <div class="list-header">
+        <h2>Próximos lembretes</h2>
+        <select id="filtroStatus">
+          <option value="pendente">Pendentes</option>
+          <option value="concluida">Concluídas</option>
+          <option value="todos">Todos</option>
+        </select>
+      </div>
+      <div id="listaTarefas" class="tasks"></div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast hidden"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
