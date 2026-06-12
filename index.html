@@ -9,80 +9,48 @@
 <body>
   <main class="app">
     <section class="hero">
-      <div class="hero-content">
+      <div>
         <span class="tag">Central TI</span>
-        <h1>Lembretes TI</h1>
-        <p>Organize lembretes rápidos para reuniões, retornos, prazos e atividades importantes do setor.</p>
+        <h1>Lembretes e Reuniões</h1>
+        <p>Cadastre tarefas simples para não esquecer reuniões, retornos e prazos importantes.</p>
       </div>
-
-      <div class="hero-actions">
-        <button id="btnNotificacao" class="secondary">Ativar notificações</button>
-      </div>
-    </section>
-
-    <section class="dashboard">
-      <div class="card stat-card">
-        <span>Pendentes</span>
-        <strong id="totalPendentes">0</strong>
-      </div>
-
-      <div class="card stat-card">
-        <span>Hoje</span>
-        <strong id="totalHoje">0</strong>
-      </div>
-
-      <div class="card stat-card danger">
-        <span>Atrasadas</span>
-        <strong id="totalAtrasadas">0</strong>
-      </div>
-
-      <div class="card next-card">
-        <span>Próximo lembrete</span>
-        <div id="proximoLembrete">Nenhum lembrete pendente.</div>
-      </div>
+      <button id="btnNotificacao" class="secondary">Ativar notificação no navegador</button>
     </section>
 
     <section class="grid">
       <form id="formTarefa" class="card form-card">
-        <div class="section-title">
-          <div>
-            <span class="eyebrow">Cadastro</span>
-            <h2>Novo lembrete</h2>
-          </div>
-        </div>
+        <h2>Nova tarefa/reunião</h2>
 
         <input type="hidden" id="tarefaId" />
 
-        <label for="titulo">Título</label>
-        <input id="titulo" type="text" placeholder="Ex: Retornar fornecedor do sistema" required />
+        <label>Título</label>
+        <input id="titulo" type="text" placeholder="Ex: Reunião com diretoria" required />
 
-        <label for="descricao">Descrição</label>
-        <textarea id="descricao" placeholder="Detalhes rápidos do lembrete..." rows="4"></textarea>
+        <label>Descrição</label>
+        <textarea id="descricao" placeholder="Detalhes rápidos..." rows="3"></textarea>
 
         <div class="row">
           <div>
-            <label for="data">Data</label>
+            <label>Data</label>
             <input id="data" type="date" required />
           </div>
-
           <div>
-            <label for="hora">Hora</label>
+            <label>Hora</label>
             <input id="hora" type="time" required />
           </div>
         </div>
 
         <div class="row">
           <div>
-            <label for="prioridade">Prioridade</label>
+            <label>Prioridade</label>
             <select id="prioridade">
               <option value="baixa">Baixa</option>
               <option value="media" selected>Média</option>
               <option value="alta">Alta</option>
             </select>
           </div>
-
           <div>
-            <label for="minutosAntes">Avisar antes</label>
+            <label>Avisar antes</label>
             <select id="minutosAntes">
               <option value="10">10 minutos</option>
               <option value="15" selected>15 minutos</option>
@@ -92,31 +60,34 @@
           </div>
         </div>
 
-        <label for="email">E-mail para notificar</label>
+        <label>E-mail para notificar</label>
         <input id="email" type="email" placeholder="ti@empresa.com.br" />
 
-        <div class="form-actions">
-          <button type="submit" class="primary">Salvar lembrete</button>
-          <button type="button" id="btnCancelar" class="ghost hidden">Cancelar edição</button>
-        </div>
+        <button type="submit" class="primary">Salvar lembrete</button>
+        <button type="button" id="btnCancelar" class="ghost hidden">Cancelar edição</button>
       </form>
 
-      <section class="card list-card">
-        <div class="list-header">
-          <div>
-            <span class="eyebrow">Agenda</span>
-            <h2>Próximos lembretes</h2>
-          </div>
-
-          <select id="filtroStatus">
-            <option value="pendente">Pendentes</option>
-            <option value="concluida">Concluídas</option>
-            <option value="todos">Todos</option>
-          </select>
+      <section class="card resumo-card">
+        <h2>Resumo</h2>
+        <div class="stats">
+          <div><strong id="totalPendentes">0</strong><span>Pendentes</span></div>
+          <div><strong id="totalHoje">0</strong><span>Hoje</span></div>
+          <div><strong id="totalAtrasadas">0</strong><span>Atrasadas</span></div>
         </div>
-
-        <div id="listaTarefas" class="tasks"></div>
+        <div id="proximoLembrete" class="next-box">Nenhum lembrete pendente.</div>
       </section>
+    </section>
+
+    <section class="card list-card">
+      <div class="list-header">
+        <h2>Próximos lembretes</h2>
+        <select id="filtroStatus">
+          <option value="pendente">Pendentes</option>
+          <option value="concluida">Concluídas</option>
+          <option value="todos">Todos</option>
+        </select>
+      </div>
+      <div id="listaTarefas" class="tasks"></div>
     </section>
   </main>
 
