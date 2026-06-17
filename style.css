@@ -406,8 +406,8 @@ select:focus {
 
   .task-actions {
     position: absolute;
-    right: 24px;
-    top: 80%;
+    right: 30px;
+    top: 60%;
     transform: translateY(-50%);
 
     display: flex;
