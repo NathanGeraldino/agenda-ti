@@ -404,8 +404,14 @@ select:focus {
     max-width: 100%;
   }
 
-  .task {
-    padding: 20px;
+  .task-actions {
+    position: absolute;
+    right: 24px;
+    top: 50%;
+    transform: translateY(-50%);
+
+    display: flex;
+    gap: 12px;
   }
 
   .task button {
