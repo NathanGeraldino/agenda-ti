@@ -378,6 +378,22 @@ select:focus {
     margin-top: 0;
   }
 
+.actions {
+    position: absolute;
+    right: 24px;
+    top: 88px;
+    transform: none;
+
+    display: flex;
+    gap: 12px;
+  }
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
 /* RESPONSIVO */
 @media (max-width: 900px) {
   .app {
