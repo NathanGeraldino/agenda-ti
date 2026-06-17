@@ -31,7 +31,7 @@ async function executar() {
       horario.getTime() - tarefa.minutos_antes * 60000
     );
 
-    if (agora >= aviso && agora <= horario) {
+    if (agora >= aviso) {
       try {
         await resend.emails.send({
           from: "Lembretes TI <onboarding@resend.dev>",
