@@ -17,10 +17,22 @@ async function executar() {
     .eq("status", "pendente")
     .eq("notificado_email", false);
 
+  console.log("Agora:", agora.toISOString());
+console.log("Tarefas encontradas:", tarefas.length);
+console.table(tarefas.map(t => ({
+  titulo: t.titulo,
+  data_hora: t.data_hora,
+  minutos_antes: t.minutos_antes,
+  email: t.email,
+  status: t.status,
+  notificado_email: t.notificado_email
+})));
+
   if (error) {
     console.error(error);
     return;
   }
+  
 
   for (const tarefa of tarefas) {
     if (!tarefa.email) continue;
@@ -30,6 +42,11 @@ async function executar() {
     const aviso = new Date(
       horario.getTime() - tarefa.minutos_antes * 60000
     );
+
+    console.log("Verificando:", tarefa.titulo);
+console.log("Horário:", horario.toISOString());
+console.log("Aviso:", aviso.toISOString());
+console.log("Pode enviar?", agora >= aviso);
 
     if (agora >= aviso) {
       try {
