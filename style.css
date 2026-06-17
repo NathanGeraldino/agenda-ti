@@ -353,11 +353,6 @@ select:focus {
   background: #fee2e2;
   color: var(--vermelho);
 }
-
-.task > button {
-  float: right;
-}
-
 .toast {
   position: fixed;
   right: 24px;
@@ -368,6 +363,20 @@ select:focus {
   border-radius: 14px;
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.22);
 }
+
+.task-actions {
+    position: absolute;
+    right: 24px;
+    top: 88px;
+    transform: none;
+
+    display: flex;
+    gap: 12px;
+  }
+
+    .task button {
+    margin-top: 0;
+  }
 
 /* RESPONSIVO */
 @media (max-width: 900px) {
@@ -402,18 +411,4 @@ select:focus {
 
   .list-header select {
     max-width: 100%;
-  }
-
-  .task-actions {
-    position: absolute;
-    right: 24px;
-    top: 88px;
-    transform: none;
-
-    display: flex;
-    gap: 12px;
-  }
-
-    .task button {
-    margin-top: 0;
   }
