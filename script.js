@@ -7,6 +7,8 @@ const btnTema = document.getElementById("btnTema");
 const calendario = document.getElementById("calendario");
 const calendarioMes = document.getElementById("calendarioMes");
 const toast = document.getElementById("toast");
+const relatorioMes = document.getElementById("relatorioMes");
+const btnExportarRelatorio = document.getElementById("btnExportarRelatorio");
 
 let tarefas = [];
 let notificadasLocalmente = new Set();
@@ -265,6 +267,7 @@ document.getElementById("proximoLembrete").innerHTML = proxima
     `;
   }).join("");
   renderizarCalendario();
+  renderizarRelatorio();
 }
 
 function renderizarCalendario() {
@@ -312,6 +315,39 @@ function renderizarCalendario() {
   }
 }
 
+function renderizarRelatorio() {
+  if (!relatorioMes) return;
+
+  const hoje = new Date();
+  const mesAtual = `${hoje.getFullYear()}-${String(hoje.getMonth() + 1).padStart(2, "0")}`;
+
+  if (!relatorioMes.value) {
+    relatorioMes.value = mesAtual;
+  }
+
+  const mesSelecionado = relatorioMes.value;
+
+  const tarefasMes = tarefas.filter(t => {
+    return t.data_hora && t.data_hora.slice(0, 7) === mesSelecionado;
+  });
+
+  const pendentes = tarefasMes.filter(t => t.status !== "concluida");
+  const concluidas = tarefasMes.filter(t => t.status === "concluida");
+  const atrasadas = tarefasMes.filter(estaAtrasada);
+  const altas = tarefasMes.filter(t => t.prioridade === "alta");
+
+  const taxa = tarefasMes.length > 0
+    ? Math.round((concluidas.length / tarefasMes.length) * 100)
+    : 0;
+
+  document.getElementById("relTotal").textContent = tarefasMes.length;
+  document.getElementById("relPendentes").textContent = pendentes.length;
+  document.getElementById("relConcluidas").textContent = concluidas.length;
+  document.getElementById("relAtrasadas").textContent = atrasadas.length;
+  document.getElementById("relTaxa").textContent = `${taxa}%`;
+  document.getElementById("relAlta").textContent = altas.length;
+}
+
 function verificarNotificacoesLocais() {
   if (!("Notification" in window) || Notification.permission !== "granted") return;
 
@@ -333,6 +369,52 @@ function verificarNotificacoesLocais() {
       mostrarToast(`Lembrete: ${t.titulo}`);
     }
   });
+}
+
+function exportarRelatorioCSV() {
+  const mesSelecionado = relatorioMes.value;
+
+  const tarefasMes = tarefas.filter(t => {
+    return t.data_hora && t.data_hora.slice(0, 7) === mesSelecionado;
+  });
+
+  if (!tarefasMes.length) {
+    mostrarToast("Nenhum dado encontrado para exportar.");
+    return;
+  }
+
+  const linhas = [
+    ["Título", "Descrição", "Data/Hora", "Prioridade", "Status", "E-mail", "Aviso antes"]
+  ];
+
+  tarefasMes.forEach(t => {
+    linhas.push([
+      t.titulo,
+      t.descricao || "",
+      formatarDataHora(t.data_hora),
+      t.prioridade,
+      t.status,
+      t.email || "",
+      `${t.minutos_antes} minutos`
+    ]);
+  });
+
+  const csv = linhas
+    .map(linha => linha.map(campo => `"${String(campo).replaceAll('"', '""')}"`).join(";"))
+    .join("\n");
+
+  const blob = new Blob(["\uFEFF" + csv], {
+    type: "text/csv;charset=utf-8;"
+  });
+
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+
+  link.href = url;
+  link.download = `relatorio-lembretes-${mesSelecionado}.csv`;
+  link.click();
+
+  URL.revokeObjectURL(url);
 }
 
 form.addEventListener("submit", async (e) => {
@@ -401,6 +483,10 @@ btnTema.addEventListener("click", () => {
 });
 
 calendarioMes.addEventListener("change", renderizarCalendario);
+
+relatorioMes.addEventListener("change", renderizarRelatorio);
+
+btnExportarRelatorio.addEventListener("click", exportarRelatorioCSV);
 
 carregarTarefas();
 
