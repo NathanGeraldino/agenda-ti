@@ -405,3 +405,8 @@ btnTema.addEventListener("click", () => {
 });
 
 calendarioMes.addEventListener("change", renderizarCalendario);
+
+carregarTarefas();
+
+setInterval(verificarNotificacoesLocais, 30000);
+setInterval(carregarTarefas, 60000);
