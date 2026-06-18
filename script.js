@@ -383,15 +383,30 @@ function exportarRelatorioCSV() {
     return;
   }
 
+  const concluidas = tarefasMes.filter(t => t.status === "concluida").length;
+  const pendentes = tarefasMes.filter(t => t.status !== "concluida").length;
+  const atrasadas = tarefasMes.filter(estaAtrasada).length;
+  const taxa = tarefasMes.length > 0
+    ? Math.round((concluidas / tarefasMes.length) * 100)
+    : 0;
+
   const linhas = [
-    ["Título", "Descrição", "Data/Hora", "Prioridade", "Status", "E-mail", "Aviso antes"]
+    ["RELATÓRIO DE LEMBRETES TI"],
+    ["Mês", mesSelecionado],
+    ["Total", tarefasMes.length],
+    ["Pendentes", pendentes],
+    ["Concluídas", concluidas],
+    ["Atrasadas", atrasadas],
+    ["Taxa de conclusão", `${taxa}%`],
+    [],
+    ["Título", "Descrição", "Data e Hora", "Prioridade", "Status", "E-mail", "Aviso antes"]
   ];
 
   tarefasMes.forEach(t => {
     linhas.push([
       t.titulo,
-      t.descricao || "",
-      formatarDataHora(t.data_hora),
+      t.descricao || "Sem descrição",
+      formatarDataHora(t.data_hora).replace(" ", " às "),
       t.prioridade,
       t.status,
       t.email || "",
@@ -400,7 +415,11 @@ function exportarRelatorioCSV() {
   });
 
   const csv = linhas
-    .map(linha => linha.map(campo => `"${String(campo).replaceAll('"', '""')}"`).join(";"))
+    .map(linha =>
+      linha.map(campo =>
+        `"${String(campo).replaceAll('"', '""')}"`
+      ).join(";")
+    )
     .join("\n");
 
   const blob = new Blob(["\uFEFF" + csv], {
