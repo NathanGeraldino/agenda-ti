@@ -3,6 +3,9 @@ const lista = document.getElementById("listaTarefas");
 const filtroStatus = document.getElementById("filtroStatus");
 const btnCancelar = document.getElementById("btnCancelar");
 const btnNotificacao = document.getElementById("btnNotificacao");
+const btnTema = document.getElementById("btnTema");
+const calendario = document.getElementById("calendario");
+const calendarioMes = document.getElementById("calendarioMes");
 const toast = document.getElementById("toast");
 
 let tarefas = [];
@@ -183,6 +186,14 @@ function renderizar() {
   document.getElementById("totalHoje").textContent = pendentes.filter(t => t.data_hora.slice(0, 10) === hoje).length;
   document.getElementById("totalAtrasadas").textContent = pendentes.filter(estaAtrasada).length;
 
+  const concluidas = tarefas.filter(t => t.status === "concluida");
+const totalGeral = tarefas.length;
+const taxa = totalGeral > 0 ? Math.round((concluidas.length / totalGeral) * 100) : 0;
+
+document.getElementById("totalConcluidas").textContent = concluidas.length;
+document.getElementById("taxaConclusao").textContent = `${taxa}%`;
+document.getElementById("totalReunioes").textContent = concluidas.length;
+
   const proxima = pendentes
     .sort((a, b) => criarDataLocal(a.data_hora) - criarDataLocal(b.data_hora))[0];
 
@@ -232,7 +243,7 @@ document.getElementById("proximoLembrete").innerHTML = proxima
     const atrasada = estaAtrasada(t);
 
     return `
-      <article class="task">
+      <article class="task prioridade-${t.prioridade}">
         <div>
           <h3>${t.titulo}</h3>
           <p>${t.descricao || "Sem descrição."}</p>
@@ -253,6 +264,38 @@ document.getElementById("proximoLembrete").innerHTML = proxima
       </article>
     `;
   }).join("");
+  renderizarCalendario();
+}
+
+function renderizarCalendario() {
+  if (!calendario || !calendarioMes) return;
+
+  const hoje = new Date();
+  const mesSelecionado = calendarioMes.value || `${hoje.getFullYear()}-${String(hoje.getMonth() + 1).padStart(2, "0")}`;
+
+  calendarioMes.value = mesSelecionado;
+
+  const [ano, mes] = mesSelecionado.split("-").map(Number);
+  const ultimoDia = new Date(ano, mes, 0).getDate();
+
+  calendario.innerHTML = "";
+
+  for (let dia = 1; dia <= ultimoDia; dia++) {
+    const dataISO = `${ano}-${String(mes).padStart(2, "0")}-${String(dia).padStart(2, "0")}`;
+
+    const tarefasDia = tarefas.filter(t => t.data_hora.slice(0, 10) === dataISO);
+
+    calendario.innerHTML += `
+      <div class="calendar-day">
+        <strong>${dia}</strong>
+        ${tarefasDia.map(t => `
+          <span class="calendar-item">
+            ${t.status === "concluida" ? "✓" : "•"} ${t.titulo}
+          </span>
+        `).join("")}
+      </div>
+    `;
+  }
 }
 
 function verificarNotificacoesLocais() {
@@ -330,3 +373,21 @@ carregarTarefas();
 
 setInterval(verificarNotificacoesLocais, 30000);
 setInterval(carregarTarefas, 60000);
+
+const temaSalvo = localStorage.getItem("tema-lembretes");
+
+if (temaSalvo === "dark") {
+  document.body.classList.add("dark");
+  btnTema.textContent = "☀️ Modo claro";
+}
+
+btnTema.addEventListener("click", () => {
+  document.body.classList.toggle("dark");
+
+  const darkAtivo = document.body.classList.contains("dark");
+
+  localStorage.setItem("tema-lembretes", darkAtivo ? "dark" : "light");
+  btnTema.textContent = darkAtivo ? "☀️ Modo claro" : "🌙 Modo escuro";
+});
+
+calendarioMes.addEventListener("change", renderizarCalendario);
