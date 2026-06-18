@@ -383,10 +383,6 @@ btnNotificacao.addEventListener("click", async () => {
 if ("Notification" in window && Notification.permission === "granted") {
   btnNotificacao.style.display = "none";
 }
-carregarTarefas();
-
-setInterval(verificarNotificacoesLocais, 30000);
-setInterval(carregarTarefas, 60000);
 
 const temaSalvo = localStorage.getItem("tema-lembretes");
 
