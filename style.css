@@ -688,3 +688,101 @@ body.dark .empty-day {
   background: transparent;
   border: none;
 }
+
+
+.relatorio-card {
+  grid-column: 1 / -1;
+}
+
+.report-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.report-actions input {
+  max-width: 200px;
+}
+
+.small-btn {
+  padding: 13px 18px;
+  white-space: nowrap;
+}
+
+.report-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 14px;
+}
+
+.report-grid div {
+  background: #ffffff;
+  border: 1px solid #dbe6fb;
+  border-radius: 18px;
+  padding: 22px 20px;
+  min-height: 110px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.report-grid strong {
+  font-size: 34px;
+  font-weight: 900;
+  color: var(--azul);
+}
+
+.report-grid span {
+  margin-top: 8px;
+  font-size: 13px;
+  font-weight: 800;
+  color: #64748b;
+}
+
+.report-grid div:nth-child(1) {
+  border-left: 6px solid var(--azul);
+}
+
+.report-grid div:nth-child(2) {
+  border-left: 6px solid #f59e0b;
+}
+
+.report-grid div:nth-child(3) {
+  border-left: 6px solid #16a34a;
+}
+
+.report-grid div:nth-child(4) {
+  border-left: 6px solid #ef4444;
+}
+
+.report-grid div:nth-child(5) {
+  border-left: 6px solid #8b5cf6;
+}
+
+.report-grid div:nth-child(6) {
+  border-left: 6px solid #dc2626;
+}
+
+body.dark .report-grid div {
+  background: #111827;
+  border-color: #334155;
+}
+
+body.dark .report-grid span {
+  color: #cbd5e1;
+}
+
+@media (max-width: 900px) {
+  .report-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .report-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .report-actions input {
+    max-width: 100%;
+  }
+}
