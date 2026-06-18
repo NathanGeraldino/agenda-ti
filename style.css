@@ -568,3 +568,122 @@ body.dark .list-header select {
   background: #111827;
   color: #e5e7eb;
 }
+
+
+
+.calendar-card {
+  grid-column: 1 / -1;
+}
+
+.calendar-card .list-header {
+  margin-bottom: 22px;
+}
+
+.calendar-card input[type="month"] {
+  max-width: 220px;
+  font-weight: 800;
+}
+
+.calendar {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 12px;
+}
+
+.calendar-weekday {
+  text-align: center;
+  font-size: 13px;
+  font-weight: 900;
+  color: #64748b;
+  padding: 8px;
+}
+
+.calendar-day {
+  min-height: 118px;
+  border: 1px solid #dbe6fb;
+  border-radius: 16px;
+  background: linear-gradient(180deg, #ffffff, #fbfdff);
+  padding: 12px;
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.03);
+}
+
+.calendar-day strong {
+  display: inline-flex;
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  align-items: center;
+  justify-content: center;
+  color: #0d2ed3;
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.calendar-day.has-event {
+  border-color: #0d2ed3;
+  background: #f8fbff;
+}
+
+.calendar-day.has-event strong {
+  background: #0d2ed3;
+  color: white;
+}
+
+.empty-day {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.calendar-events {
+  margin-top: 8px;
+  display: grid;
+  gap: 6px;
+}
+
+.calendar-item {
+  display: block;
+  font-size: 11px;
+  font-weight: 900;
+  background: #eef2ff;
+  color: #0d2ed3;
+  padding: 6px 8px;
+  border-radius: 999px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.calendar-item.prioridade-alta {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.calendar-item.prioridade-media {
+  background: #fef3c7;
+  color: #d97706;
+}
+
+.calendar-item.prioridade-baixa {
+  background: #dcfce7;
+  color: #16a34a;
+}
+
+body.dark .calendar-weekday {
+  color: #cbd5e1;
+}
+
+body.dark .calendar-day {
+  background: #111827;
+  border-color: #334155;
+}
+
+body.dark .calendar-day.has-event {
+  border-color: #0d2ed3;
+  background: #0f172a;
+}
+
+body.dark .empty-day {
+  background: transparent;
+  border: none;
+}
