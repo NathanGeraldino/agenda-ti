@@ -15,7 +15,10 @@
         <h1>Lembretes</h1>
         <p>Gerencie lembretes importantes, reuniões, retornos e compromissos do setor de TI em um único lugar.</p>
       </div>
-      <button id="btnNotificacao" class="secondary">Ativar notificação no navegador</button>
+      <div class="hero-actions">
+        <button id="btnTema" class="secondary">🌙 Modo escuro</button>
+        <button id="btnNotificacao" class="secondary">Ativar notificação no navegador</button>
+      </div>
     </section>
 
     <section class="grid">
@@ -81,7 +84,7 @@
     Nenhum lembrete pendente.
   </div>
 
-  <div class="stats">
+  <div class="stats dashboard-grid">
     <div>
       <strong id="totalPendentes">0</strong>
       <span>Pendentes</span>
@@ -96,7 +99,31 @@
       <strong id="totalAtrasadas">0</strong>
       <span>Atrasadas</span>
     </div>
+
+    <div>
+  <strong id="totalConcluidas">0</strong>
+  <span>Concluídas</span>
+</div>
+
+<div>
+  <strong id="taxaConclusao">0%</strong>
+  <span>Taxa conclusão</span>
+</div>
+
+<div>
+  <strong id="totalReunioes">0</strong>
+  <span>Reuniões feitas</span>
+</div>
   </div>
+</section>
+
+      <section class="card calendar-card">
+  <div class="list-header">
+    <h2>Calendário</h2>
+    <input id="calendarioMes" type="month" />
+  </div>
+
+  <div id="calendario" class="calendar"></div>
 </section>
 
     <section class="card list-card">
