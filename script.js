@@ -271,14 +271,25 @@ function renderizarCalendario() {
   if (!calendario || !calendarioMes) return;
 
   const hoje = new Date();
-  const mesSelecionado = calendarioMes.value || `${hoje.getFullYear()}-${String(hoje.getMonth() + 1).padStart(2, "0")}`;
+  const mesSelecionado =
+    calendarioMes.value ||
+    `${hoje.getFullYear()}-${String(hoje.getMonth() + 1).padStart(2, "0")}`;
 
   calendarioMes.value = mesSelecionado;
 
   const [ano, mes] = mesSelecionado.split("-").map(Number);
+  const primeiroDiaSemana = new Date(ano, mes - 1, 1).getDay();
   const ultimoDia = new Date(ano, mes, 0).getDate();
 
-  calendario.innerHTML = "";
+  const nomesDias = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
+
+  calendario.innerHTML = nomesDias
+    .map(dia => `<div class="calendar-weekday">${dia}</div>`)
+    .join("");
+
+  for (let i = 0; i < primeiroDiaSemana; i++) {
+    calendario.innerHTML += `<div class="calendar-day empty-day"></div>`;
+  }
 
   for (let dia = 1; dia <= ultimoDia; dia++) {
     const dataISO = `${ano}-${String(mes).padStart(2, "0")}-${String(dia).padStart(2, "0")}`;
@@ -286,13 +297,16 @@ function renderizarCalendario() {
     const tarefasDia = tarefas.filter(t => t.data_hora.slice(0, 10) === dataISO);
 
     calendario.innerHTML += `
-      <div class="calendar-day">
+      <div class="calendar-day ${tarefasDia.length ? "has-event" : ""}">
         <strong>${dia}</strong>
-        ${tarefasDia.map(t => `
-          <span class="calendar-item">
-            ${t.status === "concluida" ? "✓" : "•"} ${t.titulo}
-          </span>
-        `).join("")}
+
+        <div class="calendar-events">
+          ${tarefasDia.map(t => `
+            <span class="calendar-item prioridade-${t.prioridade}">
+              ${t.status === "concluida" ? "✓" : "•"} ${t.titulo}
+            </span>
+          `).join("")}
+        </div>
       </div>
     `;
   }
