@@ -428,3 +428,143 @@ select:focus {
   .list-header select {
     max-width: 100%;
   }
+
+
+
+
+
+.hero-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+.dashboard-grid div:nth-child(4) {
+  border-left: 6px solid #16a34a;
+}
+
+.dashboard-grid div:nth-child(5) {
+  border-left: 6px solid #8b5cf6;
+}
+
+.dashboard-grid div:nth-child(6) {
+  border-left: 6px solid #0ea5e9;
+}
+
+.badge.alta {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.badge.media {
+  background: #fef3c7;
+  color: #d97706;
+}
+
+.badge.baixa {
+  background: #dcfce7;
+  color: #16a34a;
+}
+
+.badge.atrasada {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.badge.concluida {
+  background: #dcfce7;
+  color: #16a34a;
+}
+
+.task.prioridade-alta {
+  border-left-color: #ef4444;
+}
+
+.task.prioridade-media {
+  border-left-color: #f59e0b;
+}
+
+.task.prioridade-baixa {
+  border-left-color: #16a34a;
+}
+
+.calendar-card {
+  grid-column: 1 / -1;
+}
+
+.calendar {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+}
+
+.calendar-day {
+  min-height: 96px;
+  border: 1px solid #dbe6fb;
+  border-radius: 14px;
+  background: #fff;
+  padding: 10px;
+}
+
+.calendar-day strong {
+  display: block;
+  margin-bottom: 8px;
+  color: #0d2ed3;
+}
+
+.calendar-item {
+  display: block;
+  font-size: 11px;
+  font-weight: 800;
+  background: #eef2ff;
+  color: #0d2ed3;
+  padding: 5px 7px;
+  border-radius: 999px;
+  margin-top: 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* MODO ESCURO */
+body.dark {
+  background:
+    radial-gradient(circle at top left, rgba(13, 46, 211, 0.22), transparent 30%),
+    linear-gradient(180deg, #0f172a, #111827);
+  color: #e5e7eb;
+}
+
+body.dark .card,
+body.dark .task,
+body.dark .calendar-day,
+body.dark input,
+body.dark textarea,
+body.dark select,
+body.dark .stats div {
+  background: #111827;
+  color: #e5e7eb;
+  border-color: #334155;
+}
+
+body.dark .next-box {
+  background: #111827;
+  border-color: #334155;
+}
+
+body.dark label,
+body.dark .task p,
+body.dark .stats span {
+  color: #cbd5e1;
+}
+
+body.dark .calendar-item,
+body.dark .badge {
+  background: #1e293b;
+}
+
+body.dark .list-header select {
+  background: #111827;
+  color: #e5e7eb;
+}
